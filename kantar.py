@@ -90,4 +90,5 @@ def process():
     save_results_to_a_file(results)
 
 
-process()
+if __name__ == "__main__":
+    process()
