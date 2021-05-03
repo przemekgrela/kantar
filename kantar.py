@@ -15,6 +15,15 @@ def convert_dates_to_datetimes(sessions):
     return sessions
 
 
+def convert_datetimes_to_dates(sessions):
+    datetime_fields = ['Starttime', 'EndTime']
+    for session in sessions:
+        for field in datetime_fields:
+            session[field] = session[field].strftime('%Y%m%d%H%M%S')
+    
+    return sessions
+
+
 def get_endtime(start_time):
     return start_time - datetime.timedelta(seconds=1)
 
@@ -60,7 +69,7 @@ def process_data(sessions):
             output['EndTime'], output['Starttime'])
         results.append(output)
 
-    return results
+    return convert_datetimes_to_dates(results)
 
 
 def get_data_from_file():
